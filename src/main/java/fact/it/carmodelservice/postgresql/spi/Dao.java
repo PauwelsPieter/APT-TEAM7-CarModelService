@@ -9,5 +9,7 @@ public interface Dao<T, I> {
     Optional<I> save(T t);
     void update(T t);
     void delete(T t);
+
+    void deleteAll();
 }
 

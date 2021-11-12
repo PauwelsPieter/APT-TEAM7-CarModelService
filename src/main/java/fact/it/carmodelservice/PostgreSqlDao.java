@@ -1,7 +1,7 @@
 package fact.it.carmodelservice;
 
 import fact.it.carmodelservice.model.JdcbConnection;
-import fact.it.carmodelservice.model.carmodel;
+import fact.it.carmodelservice.model.Carmodel;
 import fact.it.carmodelservice.postgresql.spi.Dao;
 
 import java.sql.*;
@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PostgreSqlDao implements Dao<carmodel, Integer> {
+public class PostgreSqlDao implements Dao<Carmodel, Integer> {
 
     private static final Logger LOGGER =
             Logger.getLogger(PostgreSqlDao.class.getName());
@@ -23,9 +23,9 @@ public class PostgreSqlDao implements Dao<carmodel, Integer> {
     }
 
     @Override
-    public Optional<Integer> save(carmodel newmodel) {
+    public Optional<Integer> save(Carmodel newmodel) {
         String message = "The model to be added should not be null";
-        carmodel nonNullcarmodel = Objects.requireNonNull(newmodel, message);
+        Carmodel nonNullcarmodel = Objects.requireNonNull(newmodel, message);
         String sql = "INSERT INTO modeldata(id, brandid, year, type, engine, name) VALUES(?,?,?,?,?,?)";
 
         return connection.flatMap(conn -> {
@@ -67,9 +67,9 @@ public class PostgreSqlDao implements Dao<carmodel, Integer> {
         });
     }
 
-    public Optional<carmodel> get(int id) {
+    public Optional<Carmodel> get(int id) {
         return connection.flatMap(conn -> {
-            Optional<carmodel> carmodel = Optional.empty();
+            Optional<Carmodel> carmodel = Optional.empty();
             String sql = "SELECT * FROM modeldata WHERE id = " + id;
 
             try (Statement statement = conn.createStatement();
@@ -83,7 +83,7 @@ public class PostgreSqlDao implements Dao<carmodel, Integer> {
                     int brandId = resultSet.getInt("brandid");
 
                     carmodel = Optional.of(
-                            new carmodel(id, brandId, year, type, engine, name));
+                            new Carmodel(id, brandId, year, type, engine, name));
 
                     LOGGER.log(Level.INFO, "Found {0} in database", carmodel.get());
                 }
@@ -95,8 +95,8 @@ public class PostgreSqlDao implements Dao<carmodel, Integer> {
         });
     }
 
-    public Collection<carmodel> getAll() {
-        Collection<carmodel> models = new ArrayList<>();
+    public Collection<Carmodel> getAll() {
+        Collection<Carmodel> models = new ArrayList<>();
         String sql = "SELECT * FROM modeldata";
 
         connection.ifPresent(conn -> {
@@ -112,7 +112,7 @@ public class PostgreSqlDao implements Dao<carmodel, Integer> {
                     int id = resultSet.getInt("id");
 
 
-                    carmodel model = new carmodel(id, brandId, year, type, engine, name);
+                    Carmodel model = new Carmodel(id, brandId, year, type, engine, name);
 
                     models.add(model);
 
@@ -127,9 +127,9 @@ public class PostgreSqlDao implements Dao<carmodel, Integer> {
         return models;
     }
 
-    public void update(carmodel model) {
+    public void update(Carmodel model) {
         String message = "The model to be updated should not be null";
-        carmodel nonNullcarmodel = Objects.requireNonNull(model, message);
+        Carmodel nonNullcarmodel = Objects.requireNonNull(model, message);
         String sql = "UPDATE modeldata "
                 + "SET "
                 + "brandid = ?, "
@@ -162,9 +162,25 @@ public class PostgreSqlDao implements Dao<carmodel, Integer> {
         });
     }
 
-    public void delete(carmodel model) {
+    public void deleteAll() {
+        String sql = "DELETE FROM modeldata";
+
+        connection.ifPresent(conn -> {
+            try (PreparedStatement statement = conn.prepareStatement(sql)) {
+
+                int numberOfDeletedRows = statement.executeUpdate();
+
+                LOGGER.log(Level.INFO, "All models deleted");
+
+            } catch (SQLException ex) {
+                LOGGER.log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+
+    public void delete(Carmodel model) {
         String message = "The model to be deleted should not be null";
-        carmodel nonNullcarmodel = Objects.requireNonNull(model, message);
+        Carmodel nonNullcarmodel = Objects.requireNonNull(model, message);
         String sql = "DELETE FROM modeldata WHERE id = ?";
 
         connection.ifPresent(conn -> {
@@ -182,4 +198,6 @@ public class PostgreSqlDao implements Dao<carmodel, Integer> {
             }
         });
     }
+
+
 }

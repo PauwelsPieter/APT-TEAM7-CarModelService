@@ -1,6 +1,6 @@
 package fact.it.carmodelservice.model;
 
-public class carmodel {
+public class Carmodel {
     private int id;
     private int brandId;
     private String year;
@@ -8,7 +8,7 @@ public class carmodel {
     private String engine;
     private String name;
 
-    public carmodel(int id, int brandId, String year, String type, String engine, String name) {
+    public Carmodel(int id, int brandId, String year, String type, String engine, String name) {
         this.id = id;
         this.brandId = brandId;
         this.year = year;
