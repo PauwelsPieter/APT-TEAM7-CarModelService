@@ -34,6 +34,17 @@ spec:
       containers:
       - image: postgres
         name: postgres
+        env:
+        - name: POSTGRES_HOST
+          value: "model-service-postgres"
+        - name: POSTGRES_PORT
+          value: "5432"
+        - name: POSTGRES_DB
+          value: modeldata
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: testgresql
         ports:
         - containerPort: 5432 
           name: postgres
