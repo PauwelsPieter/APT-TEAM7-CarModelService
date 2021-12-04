@@ -22,7 +22,9 @@ jobs:
           
       - uses: harmon758/postgresql-action@v1
         with:
-            postgresql version: '11'
+            postgresql user: 'postgres'
+            postgresql password: 'testgresql'
+            postgresql db: 'modeldata'
           
       - name: Build and analyze
         env:
