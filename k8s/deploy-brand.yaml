@@ -70,6 +70,12 @@ spec:
           value: "model-service-postgres"
         - name: POSTGRES_PORT
           value: "5432"
+        - name: POSTGRES_DB
+          value: modeldata
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: testgresql
 ---
 apiVersion: v1
 kind: Service
