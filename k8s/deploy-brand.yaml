@@ -40,11 +40,11 @@ spec:
         - name: POSTGRES_PORT
           value: "5432"
         - name: POSTGRES_DB
-          value: modeldata
+          value: "modeldata"
         - name: POSTGRES_USER
-          value: postgres
+          value: "postgres"
         - name: POSTGRES_PASSWORD
-          value: testgresql
+          value: "testgresql"
         ports:
         - containerPort: 5432 
           name: postgres
@@ -82,11 +82,11 @@ spec:
         - name: POSTGRES_PORT
           value: "5432"
         - name: POSTGRES_DB
-          value: modeldata
+          value: "modeldata"
         - name: POSTGRES_USER
-          value: postgres
+          value: "postgres"
         - name: POSTGRES_PASSWORD
-          value: testgresql
+          value: "testgresql"
 ---
 apiVersion: v1
 kind: Service
