@@ -73,7 +73,7 @@ metadata:
   labels:
     app: model-service-server
 spec:                         
-  type: JavaPort
+  type: NodePort
   selector:
     app: model-service-server
   ports:
@@ -88,7 +88,7 @@ metadata:
   labels:
     app: postgres-service
 spec:                         
-  type: postgres
+  type: NodePort
   selector:
     app: postgres-service
   ports:
