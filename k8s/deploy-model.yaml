@@ -12,42 +12,36 @@ spec:
     tier: postgres
   clusterIP: None
 ---
-apiVersion: apps/v1
+apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: model-service-postgres-deployment
-  labels:
-    app: model-service
+  name: postgres-model
 spec:
-  selector:
-    matchLabels:
-      app: model-service
-      tier: postgres
-  strategy:
-    type: Recreate
+  replicas: 1
   template:
     metadata:
       labels:
-        app: model-service
-        tier: postgres
+        service: postgres
     spec:
       containers:
-      - image: postgres
-        name: postgres
-        env:
-        - name: POSTGRES_HOST
-          value: "model-service-postgres"
-        - name: POSTGRES_PORT
-          value: "5432"
-        - name: POSTGRES_DB
-          value: "modeldata"
-        - name: POSTGRES_USER
-          value: "postgres"
-        - name: POSTGRES_PASSWORD
-          value: "testgresql"
-        ports:
-        - containerPort: 5432 
-          name: postgres
+        - name: postgres
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: modeldata
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: testgresql
+          volumeMounts:
+            - mountPath: "/var/lib/postgresql/data"
+              name: "pgdata"
+      volumes:
+        - hostPath:
+            path: "/home/docker/pgdata"
+          name: pgdata
 ---
 apiVersion: apps/v1
 kind: Deployment
