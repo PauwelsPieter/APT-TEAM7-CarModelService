@@ -16,15 +16,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres-model
+  labels:
+    app: postgres
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: model-service-server
+      app: postgres
   template:
     metadata:
       labels:
-        service: postgres
+        app: postgres
     spec:
       containers:
         - name: postgres
