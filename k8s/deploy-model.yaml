@@ -12,7 +12,7 @@ spec:
     tier: postgres
   clusterIP: None
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres-model
