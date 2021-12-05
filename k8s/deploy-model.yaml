@@ -18,6 +18,9 @@ metadata:
   name: postgres-model
 spec:
   replicas: 1
+    selector:
+    matchLabels:
+      app: model-service-server
   template:
     metadata:
       labels:
