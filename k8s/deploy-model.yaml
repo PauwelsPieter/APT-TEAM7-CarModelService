@@ -40,13 +40,6 @@ spec:
               value: postgres
             - name: POSTGRES_PASSWORD
               value: testgresql
-          volumeMounts:
-            - mountPath: "/var/lib/postgresql/data"
-              name: "pgdata"
-      volumes:
-        - hostPath:
-            path: "/home/docker/pgdata"
-          name: pgdata
 ---
 apiVersion: apps/v1
 kind: Deployment
