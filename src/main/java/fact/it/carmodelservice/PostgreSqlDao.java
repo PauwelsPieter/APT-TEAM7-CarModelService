@@ -95,6 +95,39 @@ public class PostgreSqlDao implements Dao<Carmodel, Integer> {
         });
     }
 
+    public Collection<Carmodel> getByBrand(int brandid) {
+            Collection<Carmodel> carmodels = new ArrayList<>();
+            String sql = "SELECT * FROM modeldata WHERE brandid = " + brandid;
+
+
+        connection.ifPresent(conn -> {
+            try (Statement statement = conn.createStatement();
+                 ResultSet resultSet = statement.executeQuery(sql)) {
+
+                while (resultSet.next()) {
+                    String year = resultSet.getString("year");
+                    String type = resultSet.getString("type");
+                    String engine = resultSet.getString("engine");
+                    String name = resultSet.getString("name");
+                    int brandId = resultSet.getInt("brandid");
+                    int id = resultSet.getInt("id");
+
+
+                    Carmodel model = new Carmodel(id, brandId, year, type, engine, name);
+
+                    carmodels.add(model);
+
+                    LOGGER.log(Level.INFO, "Found {0} in database", model);
+                }
+
+            } catch (SQLException ex) {
+                LOGGER.log(Level.SEVERE, null, ex);
+            }
+        });
+
+            return carmodels;
+    }
+
     public Collection<Carmodel> getAll() {
         Collection<Carmodel> models = new ArrayList<>();
         String sql = "SELECT * FROM modeldata";
