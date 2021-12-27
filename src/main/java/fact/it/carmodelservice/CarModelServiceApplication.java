@@ -6,8 +6,6 @@ import fact.it.carmodelservice.postgresql.spi.NonExistentCustomerException;
 import fact.it.carmodelservice.postgresql.spi.NonExistentEntityException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -15,8 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @SpringBootApplication
-@EnableConfigurationProperties
-@EntityScan(basePackages = {"fact.it.carmodelservice.model"})
 public class CarModelServiceApplication {
 
     public static void main(String[] args) {
