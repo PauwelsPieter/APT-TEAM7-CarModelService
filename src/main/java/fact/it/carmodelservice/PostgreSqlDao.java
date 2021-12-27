@@ -199,5 +199,21 @@ public class PostgreSqlDao implements Dao<Carmodel, Integer> {
         });
     }
 
+    public void createDB() {
+        String sql = "CREATE TABLE IF NOT EXISTS modeldata (id integer PRIMARY KEY, brandid integer, year VARCHAR ( 255 ), type VARCHAR ( 255 ), engine VARCHAR ( 255 ), name VARCHAR ( 255 ))";
+
+        connection.ifPresent(conn -> {
+            try (PreparedStatement statement = conn.prepareStatement(sql)) {
+
+                boolean succes = statement.execute();
+
+                LOGGER.log(Level.INFO, "Table created");
+
+            } catch (SQLException ex) {
+                LOGGER.log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+
 
 }

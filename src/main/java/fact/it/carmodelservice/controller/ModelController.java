@@ -18,6 +18,9 @@ public class ModelController {
 
     @PostConstruct
     public void fillDB() {
+        //create DB if needed
+        MODEL_DAO.createDB();
+
         //clear all rows
         MODEL_DAO.deleteAll();
 

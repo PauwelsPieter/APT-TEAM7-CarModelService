@@ -30,6 +30,10 @@ public class JdcbConnection {
                 String user = System.getenv("POSTGRES_USER");
                 String password = System.getenv("POSTGRES_PASSWORD");
 
+//                String url = "jdbc:postgresql://localhost:5432/postgres";
+//                String user = "postgres";
+//                String password = "testgresql";
+
                 try {
                     connection = Optional.ofNullable(
                             DriverManager.getConnection(url, user, password));

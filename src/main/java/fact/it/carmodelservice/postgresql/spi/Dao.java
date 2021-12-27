@@ -11,5 +11,7 @@ public interface Dao<T, I> {
     void delete(T t);
 
     void deleteAll();
+
+    void createDB();
 }
 
