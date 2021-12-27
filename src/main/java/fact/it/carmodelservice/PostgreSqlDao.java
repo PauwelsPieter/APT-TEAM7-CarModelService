@@ -19,7 +19,7 @@ public class PostgreSqlDao implements Dao<Carmodel, Integer> {
     private final Optional<Connection> connection;
 
     public PostgreSqlDao() {
-        this.connection = JdcbConnection.JdbcConnection.getConnection();
+        this.connection = JdcbConnection.getConnection();
     }
 
     @Override
