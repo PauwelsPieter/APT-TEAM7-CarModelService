@@ -30,11 +30,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          POSTGRES_HOST: "model-service-postgres"
-          POSTGRES_PORT: "5432"
-          POSTGRES_DD: "modeldata"
-          POSTGRES_USER: "postgres"
-          POSTGRES_PASSWORD: "testgresql"
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=PauwelsPieter_APT-TEAM7-CarModelService
 
         
