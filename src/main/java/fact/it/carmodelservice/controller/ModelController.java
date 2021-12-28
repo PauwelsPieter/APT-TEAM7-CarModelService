@@ -77,14 +77,4 @@ public class ModelController {
             return ResponseEntity.notFound().build();
         }
     }
-
-    @GetMapping("/bybrand/{id}")
-    public Collection<Carmodel> getByBrand(@PathVariable String id) {
-
-        int brandIdGiven = Integer.parseInt(id);
-
-        Collection<Carmodel> retrievedModels = MODEL_DAO.getByBrand(brandIdGiven);
-
-        return retrievedModels;
-    }
 }

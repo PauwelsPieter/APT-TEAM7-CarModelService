@@ -13,7 +13,5 @@ public interface Dao<T, I> {
     void deleteAll();
 
     void createDB();
-
-    Collection<T> getByBrand(int id);
 }
 
