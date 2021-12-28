@@ -2,13 +2,13 @@ package fact.it.carmodelservice.model;
 
 public class Carmodel {
     private int id;
-    private int brandId;
+    private String brandId;
     private String year;
     private String type;
     private String engine;
     private String name;
 
-    public Carmodel(int id, int brandId, String year, String type, String engine, String name) {
+    public Carmodel(int id, String brandId, String year, String type, String engine, String name) {
         this.id = id;
         this.brandId = brandId;
         this.year = year;
@@ -25,11 +25,11 @@ public class Carmodel {
         this.id = id;
     }
 
-    public int getBrandId() {
+    public String getBrandId() {
         return brandId;
     }
 
-    public void setBrandId(int brandId) {
+    public void setBrandId(String brandId) {
         this.brandId = brandId;
     }
 
