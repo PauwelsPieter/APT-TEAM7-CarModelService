@@ -37,7 +37,7 @@ public class PostgreSqlDao implements Dao<Carmodel, Integer> {
                                  Statement.RETURN_GENERATED_KEYS)) {
 
                 statement.setInt(1, nonNullcarmodel.getId());
-                statement.setInt(2, nonNullcarmodel.getBrandId());
+                statement.setString(2, nonNullcarmodel.getBrandId());
                 statement.setString(3, nonNullcarmodel.getYear());
                 statement.setString(4, nonNullcarmodel.getType());
                 statement.setString(5, nonNullcarmodel.getEngine());
@@ -80,7 +80,7 @@ public class PostgreSqlDao implements Dao<Carmodel, Integer> {
                     String type = resultSet.getString("type");
                     String engine = resultSet.getString("engine");
                     String name = resultSet.getString("name");
-                    int brandId = resultSet.getInt("brandid");
+                    String brandId = resultSet.getString("brandid");
 
                     carmodel = Optional.of(
                             new Carmodel(id, brandId, year, type, engine, name));
@@ -95,7 +95,7 @@ public class PostgreSqlDao implements Dao<Carmodel, Integer> {
         });
     }
 
-    public Collection<Carmodel> getByBrand(int brandid) {
+    public Collection<Carmodel> getByBrand(String brandid) {
             Collection<Carmodel> carmodels = new ArrayList<>();
             String sql = "SELECT * FROM modeldata WHERE brandid = " + brandid;
 
@@ -109,7 +109,7 @@ public class PostgreSqlDao implements Dao<Carmodel, Integer> {
                     String type = resultSet.getString("type");
                     String engine = resultSet.getString("engine");
                     String name = resultSet.getString("name");
-                    int brandId = resultSet.getInt("brandid");
+                    String brandId = resultSet.getString("brandid");
                     int id = resultSet.getInt("id");
 
 
@@ -141,7 +141,7 @@ public class PostgreSqlDao implements Dao<Carmodel, Integer> {
                     String type = resultSet.getString("type");
                     String engine = resultSet.getString("engine");
                     String name = resultSet.getString("name");
-                    int brandId = resultSet.getInt("brandid");
+                    String brandId = resultSet.getString("brandid");
                     int id = resultSet.getInt("id");
 
 
@@ -177,7 +177,7 @@ public class PostgreSqlDao implements Dao<Carmodel, Integer> {
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
 
 
-                statement.setInt(1, nonNullcarmodel.getBrandId());
+                statement.setString(1, nonNullcarmodel.getBrandId());
                 statement.setString(2, nonNullcarmodel.getYear());
                 statement.setString(3, nonNullcarmodel.getType());
                 statement.setString(4, nonNullcarmodel.getEngine());
@@ -233,7 +233,7 @@ public class PostgreSqlDao implements Dao<Carmodel, Integer> {
     }
 
     public void createDB() {
-        String sql = "CREATE TABLE IF NOT EXISTS modeldata (id integer PRIMARY KEY, brandid integer, year VARCHAR ( 255 ), type VARCHAR ( 255 ), engine VARCHAR ( 255 ), name VARCHAR ( 255 ))";
+        String sql = "CREATE TABLE IF NOT EXISTS modeldata (id integer PRIMARY KEY, brandid VARCHAR ( 255 ), year VARCHAR ( 255 ), type VARCHAR ( 255 ), engine VARCHAR ( 255 ), name VARCHAR ( 255 ))";
 
         connection.ifPresent(conn -> {
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
