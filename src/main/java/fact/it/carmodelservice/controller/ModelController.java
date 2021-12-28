@@ -28,9 +28,9 @@ public class ModelController {
         Carmodel model1 = new Carmodel(1,"1","2008","Sport", "221 hp", "Honda Civic Type R" );
         Carmodel model2 = new Carmodel(2,"1","1990","Sport", "270 hp", "Honda NSX I Coupe" );
         Carmodel model3 = new Carmodel(3,"1","2005","4x4", "160 hp", "Honda CR-V" );
-        Carmodel model4 = new Carmodel(3,"2","2020","Electric", "417 hp", "Tesla Model X Long Range" );
-        Carmodel model5 = new Carmodel(3,"2","2020","Electric", "346 hp", "Tesla Model 3 Long Range" );
-        Carmodel model6 = new Carmodel(3,"3","2021","4x4", "90 hp", "Dacia Duster " );
+        Carmodel model4 = new Carmodel(4,"2","2020","Electric", "417 hp", "Tesla Model X Long Range" );
+        Carmodel model5 = new Carmodel(5,"2","2020","Electric", "346 hp", "Tesla Model 3 Long Range" );
+        Carmodel model6 = new Carmodel(6,"3","2021","4x4", "90 hp", "Dacia Duster " );
         MODEL_DAO.save(model1).ifPresent(model1::setId);
         MODEL_DAO.save(model2).ifPresent(model2::setId);
         MODEL_DAO.save(model3).ifPresent(model3::setId);
@@ -43,10 +43,7 @@ public class ModelController {
     public Collection<Carmodel> getAll() {
         return MODEL_DAO.getAll();
     }
-
-
-
-
+    
     @PostMapping("/models")
     public Carmodel addModel(@RequestBody Carmodel newmodel) {
         MODEL_DAO.save(newmodel);
