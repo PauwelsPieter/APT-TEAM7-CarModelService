@@ -97,7 +97,7 @@ public class PostgreSqlDao implements Dao<Carmodel, Integer> {
 
     public Collection<Carmodel> getByYear(String searchYear) {
             Collection<Carmodel> carmodels = new ArrayList<>();
-            String sql = "SELECT * FROM modeldata WHERE year = " + searchYear;
+            String sql = "SELECT * FROM modeldata WHERE year LIKE " + searchYear;
 
 
         connection.ifPresent(conn -> {
@@ -130,7 +130,7 @@ public class PostgreSqlDao implements Dao<Carmodel, Integer> {
 
     public Collection<Carmodel> getByType(String searchType) {
         Collection<Carmodel> carmodels = new ArrayList<>();
-        String sql = "SELECT * FROM modeldata WHERE type = " + searchType;
+        String sql = "SELECT * FROM modeldata WHERE type LIKE " + searchType;
 
 
         connection.ifPresent(conn -> {
