@@ -39,11 +39,21 @@ public class ModelController {
         MODEL_DAO.save(model6).ifPresent(model6::setId);
     }
 
-    @GetMapping("/")
+    @GetMapping("/models")
     public Collection<Carmodel> getAll() {
         return MODEL_DAO.getAll();
     }
-    
+
+    @GetMapping("/models/year/{year}")
+    public Collection<Carmodel> getModelsByYear(@PathVariable String year) {
+        return MODEL_DAO.getByYear(year);
+    }
+
+    @GetMapping("/models/type/{type}")
+    public Collection<Carmodel> getModelsByType(@PathVariable String type) {
+        return MODEL_DAO.getByType(type);
+    }
+
     @PostMapping("/models")
     public Carmodel addModel(@RequestBody Carmodel newmodel) {
         MODEL_DAO.save(newmodel);

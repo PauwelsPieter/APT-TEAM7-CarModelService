@@ -10,6 +10,9 @@ public interface Dao<T, I> {
     void update(T t);
     void delete(T t);
 
+    Collection<T> getByYear(String year);
+    Collection<T> getByType(String type);
+
     void deleteAll();
 
     void createDB();
