@@ -109,14 +109,6 @@ public class ModelControllerIntegrationTests {
     }
 
     @Test
-    public void putnotfoundTest() throws Exception {
-        Carmodel tempModel = new Carmodel(123,"1","1995","fake type", "fake engine", "fake name" );
-
-        mockMvc.perform(put("/brands").content(mapper.writeValueAsString(tempModel)).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
-    }
-
-    @Test
     public void deleteTest() throws Exception {
         mockMvc.perform(delete("/models/{id}", "2").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());

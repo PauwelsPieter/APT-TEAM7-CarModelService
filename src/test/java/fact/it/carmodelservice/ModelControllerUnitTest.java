@@ -5,6 +5,7 @@ import fact.it.carmodelservice.model.Carmodel;
 import fact.it.carmodelservice.postgresql.spi.Dao;
 import fact.it.carmodelservice.postgresql.spi.NonExistentCustomerException;
 import fact.it.carmodelservice.postgresql.spi.NonExistentEntityException;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,12 +42,13 @@ public class ModelControllerUnitTest {
     private static final Dao<Carmodel, Integer> MODEL_DAO = new PostgreSqlDao();
 
     @BeforeEach
-    public void beforeAllTests() {
+    public void beforeEachTest() {
         modelDAO.deleteAll();
     }
 
     @AfterEach
-    public void afterAllTests() {
+    public void afterEachTest() {
+
         modelDAO.deleteAll();
     }
 

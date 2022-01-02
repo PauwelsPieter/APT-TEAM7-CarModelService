@@ -49,10 +49,6 @@ public class ModelController {
 
     @ApiIgnore
     @ApiOperation(value = "This method is used to get the Swagger documentation.")
-    @RequestMapping("/")
-    public RedirectView greeting() {
-        return new RedirectView("/swagger-ui.html");
-    }
 
     @GetMapping("/models/year/{year}")
     public Collection<Carmodel> getModelsByYear(@PathVariable String year) {
