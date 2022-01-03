@@ -114,4 +114,10 @@ public class ModelControllerIntegrationTests {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void deleteNonExistingTest() throws Exception {
+        mockMvc.perform(delete("/models/{id}", "5555").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
 }

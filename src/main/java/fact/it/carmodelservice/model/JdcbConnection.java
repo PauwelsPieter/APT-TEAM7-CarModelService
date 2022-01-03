@@ -25,14 +25,16 @@ public class JdcbConnection {
 
         public static Optional<Connection> getConnection() {
             if (connection.isEmpty()) {
-//                System.out.println("jdbc:postgresql://"+System.getenv("POSTGRES_HOST")+":"+System.getenv("POSTGRES_PORT")+"/postgres");
-//                String url = "jdbc:postgresql://"+System.getenv("POSTGRES_HOST")+":"+System.getenv("POSTGRES_PORT")+"/postgres";
-//                String user = System.getenv("POSTGRES_USER");
-//                String password = System.getenv("POSTGRES_PASSWORD");
-
                 String url = "jdbc:postgresql://localhost:5432/postgres";
                 String user = "postgres";
                 String password = "testgresql";
+
+                if (System.getenv("POSTGRES_HOST") != null){
+                    System.out.println("jdbc:postgresql://"+System.getenv("POSTGRES_HOST")+":"+System.getenv("POSTGRES_PORT")+"/postgres");
+                    url = "jdbc:postgresql://"+System.getenv("POSTGRES_HOST")+":"+System.getenv("POSTGRES_PORT")+"/postgres";
+                    user = System.getenv("POSTGRES_USER");
+                    password = System.getenv("POSTGRES_PASSWORD");
+                }
 
                 try {
                     connection = Optional.ofNullable(

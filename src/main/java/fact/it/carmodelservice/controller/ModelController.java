@@ -47,8 +47,6 @@ public class ModelController {
         return MODEL_DAO.getAll();
     }
 
-    @ApiIgnore
-    @ApiOperation(value = "This method is used to get the Swagger documentation.")
 
     @GetMapping("/models/year/{year}")
     public Collection<Carmodel> getModelsByYear(@PathVariable String year) {
@@ -69,6 +67,7 @@ public class ModelController {
     @PutMapping("/models")
     public Carmodel updateModel(@RequestBody Carmodel updatedModel) {
         Optional<Carmodel> retrievedModel = MODEL_DAO.get(updatedModel.getId());
+
         Carmodel currentModel = retrievedModel.get();
 
         currentModel.setName(updatedModel.getName());
@@ -85,12 +84,12 @@ public class ModelController {
     @DeleteMapping("/models/{id}")
     public ResponseEntity deleteModel(@PathVariable String id) {
         Optional<Carmodel> modelToDelete = MODEL_DAO.get(Integer.parseInt(id));
-        if (modelToDelete != null) {
-            MODEL_DAO.delete(modelToDelete.get());
-            return ResponseEntity.ok().build();
+        if (modelToDelete.equals(Optional.empty())) {
+            return ResponseEntity.notFound().build();
         }
         else {
-            return ResponseEntity.notFound().build();
+            MODEL_DAO.delete(modelToDelete.get());
+            return ResponseEntity.ok().build();
         }
     }
 }
