@@ -3,12 +3,9 @@ package fact.it.carmodelservice.controller;
 import fact.it.carmodelservice.PostgreSqlDao;
 import fact.it.carmodelservice.model.Carmodel;
 import fact.it.carmodelservice.postgresql.spi.Dao;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
-import springfox.documentation.annotations.ApiIgnore;
 
 import javax.annotation.PostConstruct;
 import java.util.Collection;
