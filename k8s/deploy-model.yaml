@@ -39,11 +39,20 @@ spec:
               name: postgres
           env:
             - name: POSTGRES_DB
-              value: modeldata
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: POSTGRES_DB
             - name: POSTGRES_USER
-              value: postgres
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: POSTGRES_USER
             - name: POSTGRES_PASSWORD
-              value: testgresql
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: POSTGRES_PASSWORD
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -78,11 +87,20 @@ spec:
         - name: POSTGRES_PORT
           value: "5432"
         - name: POSTGRES_DB
-          value: "modeldata"
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: POSTGRES_DB
         - name: POSTGRES_USER
-          value: "postgres"
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: POSTGRES_USER
         - name: POSTGRES_PASSWORD
-          value: "testgresql"
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: POSTGRES_PASSWORD
 ---
 apiVersion: v1
 kind: Service
